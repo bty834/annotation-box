@@ -88,7 +88,7 @@ public class MethodParamBasedValidateAspect {
                         }
                         continue;
                     }
-                    allViolations.addAll(DEFAULT_VALIDATOR.validate(arg));
+                    allViolations.addAll(validator.validate(arg));
                 }
 
             } else {
@@ -102,7 +102,7 @@ public class MethodParamBasedValidateAspect {
                         }
                         continue;
                     }
-                    allViolations.addAll(DEFAULT_VALIDATOR.validate(arg, validateMethodArgs.groups()));
+                    allViolations.addAll(validator.validate(arg, validateMethodArgs.groups()));
                 }
             }
 
