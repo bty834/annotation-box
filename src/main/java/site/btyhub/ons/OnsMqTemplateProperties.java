@@ -3,10 +3,7 @@ package site.btyhub.ons;
 import lombok.Builder;
 import lombok.Data;
 
-/**
- * @author wangxinyu26
- * @date 2021/12/24 10:16 AM
- */
+
 @Builder
 @Data
 public class OnsMqTemplateProperties {

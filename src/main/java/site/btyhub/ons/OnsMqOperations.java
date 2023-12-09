@@ -15,9 +15,6 @@ import com.aliyun.openservices.ons.api.SendResult;
  *
  * // 设置消息需要被投递的时间。<br/>
  * msg.setStartDeliverTime(timeStamp);<br/>
- *
- * @author huangguoping@baijiahulian.com
- * @date 2021/12/7
  */
 public interface OnsMqOperations {
 

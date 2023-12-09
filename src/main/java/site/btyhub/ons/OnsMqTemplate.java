@@ -16,12 +16,10 @@ import com.aliyun.openservices.ons.api.PropertyKeyConst;
 import com.aliyun.openservices.ons.api.SendResult;
 import com.aliyun.openservices.ons.api.order.OrderProducer;
 import com.aliyun.openservices.shade.com.alibaba.rocketmq.remoting.common.RemotingHelper;
-import com.gaotu.arch.ons.constant.GaotuOnsConstant;
 
-/**
- * @author huangguoping@baijiahulian.com
- * @date 2021/11/26
- */
+import site.btyhub.ons.constant.GaotuOnsConstant;
+
+
 public class OnsMqTemplate implements InitializingBean, DisposableBean, OnsMqOperations {
 
     private static final Logger log = LoggerFactory.getLogger(OnsMqTemplate.class);
