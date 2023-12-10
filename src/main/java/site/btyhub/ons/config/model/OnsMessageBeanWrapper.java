@@ -4,10 +4,7 @@ import lombok.Data;
 import site.btyhub.ons.annotation.OnsBatchMessageListener;
 import site.btyhub.ons.annotation.OnsMessageListener;
 
-/**
- * @author wangxinyu26
- * @date 2022/3/7 10:10 AM
- */
+
 @Data
 public class OnsMessageBeanWrapper {
 
