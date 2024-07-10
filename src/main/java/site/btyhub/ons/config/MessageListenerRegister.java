@@ -30,7 +30,7 @@ import site.btyhub.ons.annotation.OnsBatchMessageListener;
 import site.btyhub.ons.annotation.OnsMessageListener;
 import site.btyhub.ons.config.model.MessageListenerTypeEnum;
 import site.btyhub.ons.config.model.OnsMessageBeanWrapper;
-import site.btyhub.ons.constant.GaotuOnsConstant;
+import site.btyhub.ons.constant.Constant;
 
 
 @Slf4j
@@ -263,7 +263,7 @@ public class MessageListenerRegister implements SmartInitializingSingleton {
             try {
                 container.start();
             } catch (Exception e) {
-                log.error(GaotuOnsConstant.SYMBOL + "Started container failed. {}", container, e);
+                log.error(Constant.PREFIX + "Started container failed. {}", container, e);
                 throw new RuntimeException(e);
             }
         }
@@ -271,7 +271,7 @@ public class MessageListenerRegister implements SmartInitializingSingleton {
         List<String> listenerBeanNameList = onsMessageBeanWrapperList.stream()
             .map(OnsMessageBeanWrapper::getBeanName)
             .collect(Collectors.toList());
-        log.info(GaotuOnsConstant.SYMBOL + "Register the listener to container, listenerBeanName:{}, containerBeanName:{}", listenerBeanNameList, containerBeanName);
+        log.info(Constant.PREFIX + "Register the listener to container, listenerBeanName:{}, containerBeanName:{}", listenerBeanNameList, containerBeanName);
     }
 
     private GenericBeanDefinition createOnsMessageListenerContainerBeanDefinition(OnsMessageListener annotation, List<OnsMessageBeanWrapper> onsMessageBeanWrapperList) {

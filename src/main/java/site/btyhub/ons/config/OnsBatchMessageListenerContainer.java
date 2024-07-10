@@ -16,7 +16,7 @@ import com.aliyun.openservices.ons.api.bean.BatchConsumerBean;
 import com.aliyun.openservices.ons.api.bean.Subscription;
 import com.aliyun.openservices.shade.com.alibaba.rocketmq.common.protocol.heartbeat.MessageModel;
 import lombok.extern.slf4j.Slf4j;
-import site.btyhub.ons.constant.GaotuOnsConstant;
+import site.btyhub.ons.constant.Constant;
 
 
 @Slf4j
@@ -83,7 +83,7 @@ public class OnsBatchMessageListenerContainer implements InitializingBean, Dispo
         }
         running = true;
 
-        log.info(GaotuOnsConstant.SYMBOL + "running batch consumer container: {}", this.toString());
+        log.info(Constant.PREFIX + "running batch consumer container: {}", this.toString());
     }
 
     @Override
@@ -108,7 +108,7 @@ public class OnsBatchMessageListenerContainer implements InitializingBean, Dispo
         if (Objects.nonNull(consumerBean)) {
             consumerBean.shutdown();
         }
-        log.info(GaotuOnsConstant.SYMBOL + " container destroyed, {}", this.toString());
+        log.info(Constant.PREFIX + " container destroyed, {}", this.toString());
     }
 
     @Override

@@ -1,26 +1,5 @@
 `@OnsMessageListener`注册mq消费者：
 ```java
-package com.gaotu.lvyue.fulfillment.server.rockermq.consumer.fulfillment;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import org.apache.commons.collections4.CollectionUtils;
-import org.slf4j.MDC;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import com.aliyun.openservices.ons.api.Message;
-import com.aliyun.openservices.ons.api.order.ConsumeOrderContext;
-import com.aliyun.openservices.ons.api.order.MessageOrderListener;
-import com.aliyun.openservices.ons.api.order.OrderAction;
-import com.aliyun.openservices.shade.com.alibaba.fastjson.JSONObject;
-import com.ctrip.framework.apollo.spring.annotation.ApolloJsonValue;
-import com.gaotu.arch.ons.annotation.OnsMessageListener;
-import com.gaotu.lvyue.fulfillment.domain.platform.exception.FulfillmentBizException;
-import com.gaotu.lvyue.fulfillment.server.rockermq.consumer.fulfillment.other.IFulfillmentItemConsumeProcessor;
-import lombok.extern.slf4j.Slf4j;
 
 @Component
 @OnsMessageListener(

@@ -17,7 +17,7 @@ import com.aliyun.openservices.ons.api.SendResult;
 import com.aliyun.openservices.ons.api.order.OrderProducer;
 import com.aliyun.openservices.shade.com.alibaba.rocketmq.remoting.common.RemotingHelper;
 
-import site.btyhub.ons.constant.GaotuOnsConstant;
+import site.btyhub.ons.constant.Constant;
 
 
 public class OnsMqTemplate implements InitializingBean, DisposableBean, OnsMqOperations {
@@ -36,15 +36,15 @@ public class OnsMqTemplate implements InitializingBean, DisposableBean, OnsMqOpe
     @Override
     public SendResult sendOrderMsg(String topic, String tags, String body, String shardingKey) {
         if (!orderProducer.isStarted()) {
-            log.warn(GaotuOnsConstant.SYMBOL + "Send mq message failed.The orderProducer not started!");
-            throw new RuntimeException(GaotuOnsConstant.SYMBOL + "Send mq message failed.The orderProducer not started!");
+            log.warn(Constant.PREFIX + "Send mq message failed.The orderProducer not started!");
+            throw new RuntimeException(Constant.PREFIX + "Send mq message failed.The orderProducer not started!");
         }
         SendResult sendResult = new SendResult();
         Message message = buildMessage(topic, tags, "", body);
         try {
             sendResult = orderProducer.send(message, shardingKey);
             if (sendResult != null) {
-                log.info(GaotuOnsConstant.SYMBOL +
+                log.info(Constant.PREFIX +
                     " Send order message success. Topic is:"
                         + message.getTopic()
                         + " msgId is: "
@@ -52,7 +52,7 @@ public class OnsMqTemplate implements InitializingBean, DisposableBean, OnsMqOpe
             }
 
         } catch (Exception e) {
-            log.error(GaotuOnsConstant.SYMBOL + " Send order message failed. Topic is:" + message.getTopic());
+            log.error(Constant.PREFIX + " Send order message failed. Topic is:" + message.getTopic());
             e.printStackTrace();
         }
         return sendResult;
@@ -75,10 +75,10 @@ public class OnsMqTemplate implements InitializingBean, DisposableBean, OnsMqOpe
             // 由于在 oneway
             // 方式发送消息时没有请求应答处理，一旦出现消息发送失败，则会因为没有重试而导致数据丢失。若数据不可丢，建议选用可靠同步或可靠异步发送方式。
             producer.sendOneway(message);
-            log.info(GaotuOnsConstant.SYMBOL + " Send mq message success. Topic is:" + message.getTopic());
+            log.info(Constant.PREFIX + " Send mq message success. Topic is:" + message.getTopic());
             return true;
         } catch (Exception e) {
-            log.error(GaotuOnsConstant.SYMBOL +
+            log.error(Constant.PREFIX +
                     " Send mq message failed. Topic is: {}, msgId: {}, error : {}",
                 message.getTopic(),
                 message.getMsgID(),
@@ -99,10 +99,10 @@ public class OnsMqTemplate implements InitializingBean, DisposableBean, OnsMqOpe
             // 由于在 oneway
             // 方式发送消息时没有请求应答处理，一旦出现消息发送失败，则会因为没有重试而导致数据丢失。若数据不可丢，建议选用可靠同步或可靠异步发送方式。
             producer.sendOneway(message);
-            log.info(GaotuOnsConstant.SYMBOL + " Send mq message success. Topic is:" + message.getTopic());
+            log.info(Constant.PREFIX + " Send mq message success. Topic is:" + message.getTopic());
             return true;
         } catch (Exception e) {
-            log.error(GaotuOnsConstant.SYMBOL +
+            log.error(Constant.PREFIX +
                     " Send mq message failed. Topic is: {}, msgId: {}, error : {}",
                 message.getTopic(),
                 message.getMsgID(),
@@ -114,14 +114,14 @@ public class OnsMqTemplate implements InitializingBean, DisposableBean, OnsMqOpe
     @Override
     public SendResult sendOrderMsg(Message message, String shardingKey) {
         if (!orderProducer.isStarted()) {
-            log.warn(GaotuOnsConstant.SYMBOL + "Send mq message failed.The orderProducer not started!");
+            log.warn(Constant.PREFIX + "Send mq message failed.The orderProducer not started!");
             throw new RuntimeException("Send mq message failed.The orderProducer not started!");
         }
         SendResult sendResult = new SendResult();
         try {
             sendResult = orderProducer.send(message, shardingKey);
             if (sendResult != null) {
-                log.info(GaotuOnsConstant.SYMBOL +
+                log.info(Constant.PREFIX +
                     " Send order message success. Topic is:"
                         + message.getTopic()
                         + " msgId is: "
@@ -129,7 +129,7 @@ public class OnsMqTemplate implements InitializingBean, DisposableBean, OnsMqOpe
             }
 
         } catch (Exception e) {
-            log.error(GaotuOnsConstant.SYMBOL + " Send order message failed. Topic is:" + message.getTopic());
+            log.error(Constant.PREFIX + " Send order message failed. Topic is:" + message.getTopic());
             e.printStackTrace();
         }
         return sendResult;
@@ -138,7 +138,7 @@ public class OnsMqTemplate implements InitializingBean, DisposableBean, OnsMqOpe
     @Override
     public SendResult sendMsg(Message message) {
         if (!producer.isStarted()) {
-            log.warn(GaotuOnsConstant.SYMBOL + "Send mq message failed.The producer not started!");
+            log.warn(Constant.PREFIX + "Send mq message failed.The producer not started!");
             throw new RuntimeException("Send mq message failed.The producer not started!");
         }
 
@@ -146,7 +146,7 @@ public class OnsMqTemplate implements InitializingBean, DisposableBean, OnsMqOpe
         try {
             sendResult = producer.send(message);
             if (sendResult != null) {
-                log.info(GaotuOnsConstant.SYMBOL +
+                log.info(Constant.PREFIX +
                     " Send mq message success. Topic is:"
                         + message.getTopic()
                         + " msgId is: "
@@ -154,7 +154,7 @@ public class OnsMqTemplate implements InitializingBean, DisposableBean, OnsMqOpe
             }
 
         } catch (Exception e) {
-            log.error(GaotuOnsConstant.SYMBOL + " Send mq message failed. Topic is:" + message.getTopic());
+            log.error(Constant.PREFIX + " Send mq message failed. Topic is:" + message.getTopic());
             e.printStackTrace();
         }
         return sendResult;
@@ -168,7 +168,7 @@ public class OnsMqTemplate implements InitializingBean, DisposableBean, OnsMqOpe
         try {
             message.setBody(body.getBytes(RemotingHelper.DEFAULT_CHARSET));
         } catch (UnsupportedEncodingException e) {
-            log.error(GaotuOnsConstant.SYMBOL + "send topic failed", e);
+            log.error(Constant.PREFIX + "send topic failed", e);
         }
         return message;
     }
